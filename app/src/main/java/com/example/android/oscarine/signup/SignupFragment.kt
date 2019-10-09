@@ -28,6 +28,7 @@ class SignupFragment : Fragment() {
 
         @Suppress("UsePropertyAccessSyntax")
         binding.setLifecycleOwner(this)
+        binding.viewModel = viewModel
         return binding.root
     }
 }
