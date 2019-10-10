@@ -1,4 +1,4 @@
-package com.example.android.oscarine.network.models
+package com.example.android.oscarine.network.models.register_user
 
 data class RegisterUserProperty (
     val username: String,

@@ -3,8 +3,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.android.oscarine.signup.SignupViewModel" />
@@ -31,7 +32,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/Username"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:text="@={viewModel.username}" />
 
         <EditText
             android:id="@+id/emailInput"
@@ -39,7 +41,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:text="@={viewModel.email}" />
 
         <EditText
             android:id="@+id/passwordInput"
@@ -47,7 +50,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="@={viewModel.password}" />
 
         <EditText
             android:id="@+id/confirmPasswordInput"
@@ -55,7 +59,23 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/ConfirmPassword"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:text="@={viewModel.confirmPassword}" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Submit" />
+
+        <TextView
+            android:id="@+id/response"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="API response"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:text="@{viewModel.response}"/>
 
     </LinearLayout>
 

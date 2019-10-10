@@ -2,13 +2,14 @@ package com.example.android.oscarine.signup
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.android.oscarine.R
 import com.example.android.oscarine.databinding.FragmentSignupBinding
 
 /**
@@ -22,13 +23,21 @@ class SignupFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-//        val binding = DataBindingUtil.inflate<FragmentSignupBinding>(inflater,
-//            R.layout.fragment_signup, container, false)
         val binding = FragmentSignupBinding.inflate(inflater)
 
         @Suppress("UsePropertyAccessSyntax")
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
+
+        binding.submitButton.setOnClickListener {
+            viewModel.submitButtonClicked()
+        }
+        viewModel.response.observe(this, Observer {
+            if (it == "201") {
+                Toast.makeText(activity, "User registration successful", Toast.LENGTH_LONG).show()
+            }
+        })
+
         return binding.root
     }
 }
