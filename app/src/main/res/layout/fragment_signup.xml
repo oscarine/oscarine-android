@@ -69,6 +69,15 @@
             android:text="@string/Submit" />
 
         <TextView
+            android:id="@+id/loginTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/Login"
+            tools:text="Login"
+            android:textSize="18sp" />
+
+        <TextView
             android:id="@+id/response"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

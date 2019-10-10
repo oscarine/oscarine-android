@@ -33,6 +33,10 @@ class SignupFragment : Fragment() {
         binding.submitButton.setOnClickListener {
             viewModel.submitButtonClicked()
         }
+        binding.loginTextView.setOnClickListener {
+            navigateToSigninFragment()
+        }
+
         viewModel.response.observe(this, Observer {
             if (it == "201") {
                 Toast.makeText(activity, "User registration successful", Toast.LENGTH_LONG).show()

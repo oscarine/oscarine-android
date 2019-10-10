@@ -74,4 +74,10 @@ class SignupViewModel: ViewModel() {
         _signupSuccessful.value = false
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        _signupSuccessful.value = false
+        _response.value = ""
+    }
+
 }
