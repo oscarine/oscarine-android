@@ -1,7 +1,6 @@
 package com.example.android.oscarine.signup
 
 import android.util.Log
-import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +16,10 @@ class SignupViewModel: ViewModel() {
     val response: LiveData<String>
         get() = _response
 
+    private val _signupSuccessful = MutableLiveData<Boolean>()
+    val signupSuccessful: LiveData<Boolean>
+        get() = _signupSuccessful
+
     val username = MutableLiveData<String>()
 
     val email = MutableLiveData<String>()
@@ -26,6 +29,7 @@ class SignupViewModel: ViewModel() {
     val confirmPassword = MutableLiveData<String>()
 
     init {
+        _signupSuccessful.value = false
         _response.value = ""
     }
 
@@ -34,6 +38,7 @@ class SignupViewModel: ViewModel() {
         OscarineApi.retrofitService.registerNewUser(newUser = newUser).enqueue( object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 _response.value = response.code().toString()
+                _signupSuccessful.value = true
                 resetValuesOnSignupSuccess()
             }
 
@@ -63,6 +68,10 @@ class SignupViewModel: ViewModel() {
         email.value = ""
         password.value = ""
         confirmPassword.value = ""
+    }
+
+    fun signupSuccessfullyCompleted() {
+        _signupSuccessful.value = false
     }
 
 }

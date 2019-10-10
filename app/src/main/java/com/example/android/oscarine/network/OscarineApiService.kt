@@ -1,5 +1,6 @@
 package com.example.android.oscarine.network
 
+import com.example.android.oscarine.network.models.login_user.LoginUserProperty
 import com.example.android.oscarine.network.models.register_user.RegisterUserProperty
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -24,6 +25,10 @@ interface OscarineApiService {
 
     @POST("users")
     fun registerNewUser(@Body newUser: RegisterUserProperty):
+            Call<Any>
+
+    @POST("login")
+    fun loginUser(@Body userDetails: LoginUserProperty):
             Call<Any>
 
 }
