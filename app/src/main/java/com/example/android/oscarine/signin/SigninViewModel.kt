@@ -28,7 +28,7 @@ class SigninViewModel: ViewModel() {
     }
 
     private fun postForSigningInUser(userDetails: LoginUser) {
-        OscarineApi.retrofitService.loginUser(userDetails = userDetails).enqueue(object: Callback<Any> {
+        OscarineApi.retrofitService.loginUser(userDetails).enqueue(object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 _response.value = response.code().toString()
                 _signinSuccessful.value = true
@@ -48,7 +48,7 @@ class SigninViewModel: ViewModel() {
                 username = username.value.toString(),
                 password = password.value.toString()
             )
-        postForSigningInUser(userDetails = userDetails)
+        postForSigningInUser(userDetails)
     }
 
     fun resetValuesOnSigninSuccess() {

@@ -35,7 +35,7 @@ class SignupViewModel: ViewModel() {
 
 
     private fun postForRegisteringNewUser(newUser: RegisterUser) {
-        OscarineApi.retrofitService.registerNewUser(newUser = newUser).enqueue( object: Callback<Any> {
+        OscarineApi.retrofitService.registerNewUser(newUser).enqueue( object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 _response.value = response.code().toString()
                 _signupSuccessful.value = true
@@ -57,7 +57,7 @@ class SignupViewModel: ViewModel() {
                     email = email.value.toString(),
                     password = password.value.toString()
                 )
-            postForRegisteringNewUser(newUser = newUser)
+            postForRegisteringNewUser(newUser)
         } else {
             Log.i("SignupViewModel", "Passwords didn't match !")
         }
