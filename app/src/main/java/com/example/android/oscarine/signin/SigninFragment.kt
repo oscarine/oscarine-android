@@ -20,7 +20,6 @@ class SigninFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentSigninBinding.inflate(inflater)
 
-        @Suppress("UsePropertyAccessSyntax")
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
 
