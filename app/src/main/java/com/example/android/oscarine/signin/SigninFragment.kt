@@ -20,7 +20,7 @@ class SigninFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentSigninBinding.inflate(inflater)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.loginSubmitButton.setOnClickListener {

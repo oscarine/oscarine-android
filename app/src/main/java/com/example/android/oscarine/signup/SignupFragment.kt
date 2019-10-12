@@ -26,7 +26,7 @@ class SignupFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentSignupBinding.inflate(inflater)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
         binding.submitButton.setOnClickListener {
