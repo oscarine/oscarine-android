@@ -24,7 +24,7 @@ class SigninFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.loginSubmitButton.setOnClickListener {
-            viewModel.loginSubmitButtonClicked()
+            viewModel.login()
         }
         viewModel.response.observe(this, Observer {
             if (it == "200") {

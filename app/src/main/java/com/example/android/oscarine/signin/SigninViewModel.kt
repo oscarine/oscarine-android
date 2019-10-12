@@ -42,7 +42,7 @@ class SigninViewModel: ViewModel() {
         })
     }
 
-    fun loginSubmitButtonClicked() {
+    fun login() {
         val userDetails =
             LoginUser(
                 username = username.value.toString(),
