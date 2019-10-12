@@ -15,23 +15,15 @@ class SigninViewModel: ViewModel() {
     val response: LiveData<String>
         get() = _response
 
-    private val _signinSuccessful = MutableLiveData<Boolean>()
-    val signinSuccessful: LiveData<Boolean>
-        get() = _signinSuccessful
-
     val username = MutableLiveData<String>()
 
     val password = MutableLiveData<String>()
 
-    init {
-        _signinSuccessful.value = false
-    }
 
     private fun postForSigningInUser(userDetails: LoginUser) {
         OscarineApi.retrofitService.loginUser(userDetails).enqueue(object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 _response.value = response.code().toString()
-                _signinSuccessful.value = true
                 resetValuesOnSigninSuccess()
             }
 
