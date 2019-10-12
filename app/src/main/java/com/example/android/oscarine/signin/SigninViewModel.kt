@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.oscarine.network.OscarineApi
-import com.example.android.oscarine.network.models.login_user.LoginUserProperty
+import com.example.android.oscarine.network.models.login_user.LoginUser
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +27,7 @@ class SigninViewModel: ViewModel() {
         _signinSuccessful.value = false
     }
 
-    private fun postForSigningInUser(userDetails: LoginUserProperty) {
+    private fun postForSigningInUser(userDetails: LoginUser) {
         OscarineApi.retrofitService.loginUser(userDetails = userDetails).enqueue(object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 _response.value = response.code().toString()
@@ -44,7 +44,7 @@ class SigninViewModel: ViewModel() {
 
     fun loginSubmitButtonClicked() {
         val userDetails =
-            LoginUserProperty(
+            LoginUser(
                 username = username.value.toString(),
                 password = password.value.toString()
             )

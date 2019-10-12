@@ -1,7 +1,7 @@
 package com.example.android.oscarine.network
 
-import com.example.android.oscarine.network.models.login_user.LoginUserProperty
-import com.example.android.oscarine.network.models.register_user.RegisterUserProperty
+import com.example.android.oscarine.network.models.login_user.LoginUser
+import com.example.android.oscarine.network.models.register_user.RegisterUser
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
@@ -24,11 +24,11 @@ private val retrofit = Retrofit.Builder()
 interface OscarineApiService {
 
     @POST("users")
-    fun registerNewUser(@Body newUser: RegisterUserProperty):
+    fun registerNewUser(@Body newUser: RegisterUser):
             Call<Any>
 
     @POST("login")
-    fun loginUser(@Body userDetails: LoginUserProperty):
+    fun loginUser(@Body userDetails: LoginUser):
             Call<Any>
 
 }

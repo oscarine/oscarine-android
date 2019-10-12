@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.oscarine.network.OscarineApi
-import com.example.android.oscarine.network.models.register_user.RegisterUserProperty
+import com.example.android.oscarine.network.models.register_user.RegisterUser
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +34,7 @@ class SignupViewModel: ViewModel() {
     }
 
 
-    private fun postForRegisteringNewUser(newUser: RegisterUserProperty) {
+    private fun postForRegisteringNewUser(newUser: RegisterUser) {
         OscarineApi.retrofitService.registerNewUser(newUser = newUser).enqueue( object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 _response.value = response.code().toString()
@@ -52,7 +52,7 @@ class SignupViewModel: ViewModel() {
     fun submitButtonClicked() {
         if (password.value == confirmPassword.value) {
             val newUser =
-                RegisterUserProperty(
+                RegisterUser(
                     username = username.value.toString(),
                     email = email.value.toString(),
                     password = password.value.toString()
