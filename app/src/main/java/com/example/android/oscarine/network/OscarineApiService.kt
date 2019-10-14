@@ -1,5 +1,6 @@
 package com.example.android.oscarine.network
 
+import com.example.android.oscarine.network.models.login_user.LoginServerResponse
 import com.example.android.oscarine.network.models.login_user.LoginUser
 import com.example.android.oscarine.network.models.register_user.RegisterUser
 import com.squareup.moshi.Moshi
@@ -29,7 +30,7 @@ interface OscarineApiService {
 
     @POST("login")
     fun loginUser(@Body userDetails: LoginUser):
-            Call<Any>
+            Call<LoginServerResponse>
 
 }
 

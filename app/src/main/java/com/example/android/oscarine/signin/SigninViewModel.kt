@@ -1,15 +1,19 @@
 package com.example.android.oscarine.signin
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.android.oscarine.SharedPreference
 import com.example.android.oscarine.network.OscarineApi
+import com.example.android.oscarine.network.models.login_user.LoginServerResponse
 import com.example.android.oscarine.network.models.login_user.LoginUser
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SigninViewModel: ViewModel() {
+class SigninViewModel(private val context: Context): ViewModel() {
 
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
@@ -21,14 +25,19 @@ class SigninViewModel: ViewModel() {
 
 
     private fun postForSigningInUser(userDetails: LoginUser) {
-        OscarineApi.retrofitService.loginUser(userDetails).enqueue(object: Callback<Any> {
-            override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                _response.value = response.code().toString()
-                resetValuesOnSigninSuccess()
+        OscarineApi.retrofitService.loginUser(userDetails).enqueue(object: Callback<LoginServerResponse> {
+            override fun onFailure(call: Call<LoginServerResponse>, t: Throwable) {
+                _response.value = "Failure: " + t.message
             }
 
-            override fun onFailure(call: Call<Any>, t: Throwable) {
-                _response.value = "Failure: " + t.message
+            override fun onResponse(
+                call: Call<LoginServerResponse>,
+                response: Response<LoginServerResponse>
+            ) {
+                _response.value = response.code().toString()
+                var token = response.body()?.access_token ?: ""
+                saveToken(token)
+                resetValuesOnSigninSuccess()
             }
 
         })
@@ -48,4 +57,8 @@ class SigninViewModel: ViewModel() {
         password.value = ""
     }
 
+    fun saveToken(token: String) {
+        val preference = SharedPreference(context)
+        preference.setToken(token)
+    }
 }

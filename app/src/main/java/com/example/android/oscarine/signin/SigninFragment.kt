@@ -12,13 +12,16 @@ import com.example.android.oscarine.databinding.FragmentSigninBinding
 
 class SigninFragment : Fragment() {
 
-    private val viewModel: SigninViewModel by lazy {
-        ViewModelProviders.of(this).get(SigninViewModel::class.java)
-    }
+    private lateinit var viewModel: SigninViewModel
+    private lateinit var viewModelFactory: SigninViewModelFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentSigninBinding.inflate(inflater)
+
+        viewModelFactory = SigninViewModelFactory(context!!)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(SigninViewModel::class.java)
 
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -26,6 +29,7 @@ class SigninFragment : Fragment() {
         binding.loginSubmitButton.setOnClickListener {
             viewModel.login()
         }
+
         viewModel.response.observe(this, Observer {
             if (it == "200") {
                 Toast.makeText(activity, "You are now logged in", Toast.LENGTH_LONG).show()
