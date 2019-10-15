@@ -12,9 +12,9 @@ import retrofit2.Response
 
 class SignupViewModel: ViewModel() {
 
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
+    private val _messages = MutableLiveData<String>()
+    val messages: LiveData<String>
+        get() = _messages
 
     private val _signupSuccessful = MutableLiveData<Boolean>()
     val signupSuccessful: LiveData<Boolean>
@@ -30,20 +30,24 @@ class SignupViewModel: ViewModel() {
 
     init {
         _signupSuccessful.value = false
-        _response.value = ""
     }
 
 
     private fun postForRegisteringNewUser(newUser: RegisterUser) {
         OscarineApi.retrofitService.registerNewUser(newUser).enqueue( object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
-                _response.value = response.code().toString()
-                _signupSuccessful.value = true
-                resetValuesOnSignupSuccess()
+                val responseCode = response.code()
+                if (responseCode == 201) {
+                    _messages.value = "Registration successful"
+                    _signupSuccessful.value = true
+                    resetValuesOnSignupSuccess()
+                } else {
+                    _messages.value = "Registration failed"
+                }
             }
 
             override fun onFailure(call: Call<Any>, t: Throwable) {
-                _response.value = "Failure: " + t.message
+                _messages.value = "Failure: " + t.message
             }
 
         })
@@ -77,7 +81,7 @@ class SignupViewModel: ViewModel() {
     override fun onCleared() {
         super.onCleared()
         _signupSuccessful.value = false
-        _response.value = ""
+        _messages.value = ""
     }
 
 }

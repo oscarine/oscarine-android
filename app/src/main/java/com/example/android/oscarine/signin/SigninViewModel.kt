@@ -13,9 +13,9 @@ import retrofit2.Response
 
 class SigninViewModel(private val sharedPreference: SharedPreference): ViewModel() {
 
-    private val _response = MutableLiveData<String>()
-    val response: LiveData<String>
-        get() = _response
+    private val _messages = MutableLiveData<String>()
+    val messages: LiveData<String>
+        get() = _messages
 
     val username = MutableLiveData<String>()
 
@@ -25,17 +25,22 @@ class SigninViewModel(private val sharedPreference: SharedPreference): ViewModel
     private fun postForSigningInUser(userDetails: LoginUser) {
         OscarineApi.retrofitService.loginUser(userDetails).enqueue(object: Callback<LoginServerResponse> {
             override fun onFailure(call: Call<LoginServerResponse>, t: Throwable) {
-                _response.value = "Failure: " + t.message
+                _messages.value = "Failure: " + t.message
             }
 
             override fun onResponse(
                 call: Call<LoginServerResponse>,
                 response: Response<LoginServerResponse>
             ) {
-                _response.value = response.code().toString()
-                val token = response.body()!!.access_token
-                saveToken(token)
-                resetValuesOnSigninSuccess()
+                val responseCode = response.code()
+                if (responseCode == 200) {
+                    _messages.value = "You are now logged in"
+                    val token = response.body()!!.access_token
+                    saveToken(token)
+                    resetValuesOnSigninSuccess()
+                } else {
+                    _messages.value = "Failed to login"
+                }
             }
 
         })

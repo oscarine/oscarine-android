@@ -36,10 +36,8 @@ class SignupFragment : Fragment() {
             navigateToSigninFragment()
         }
 
-        viewModel.response.observe(this, Observer {
-            if (it == "201") {
-                Toast.makeText(activity, "User registration successful", Toast.LENGTH_LONG).show()
-            }
+        viewModel.messages.observe(this, Observer {
+            Toast.makeText(activity, "User registration successful", Toast.LENGTH_LONG).show()
         })
 
         viewModel.signupSuccessful.observe(this, Observer {

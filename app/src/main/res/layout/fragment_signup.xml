@@ -84,7 +84,7 @@
             tools:text="API response"
             android:textSize="18sp"
             android:gravity="center_horizontal"
-            android:text="@{viewModel.response}"/>
+            android:text="@{viewModel.messages}"/>
 
     </LinearLayout>
 

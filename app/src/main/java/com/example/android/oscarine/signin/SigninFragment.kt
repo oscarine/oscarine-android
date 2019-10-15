@@ -31,10 +31,8 @@ class SigninFragment : Fragment() {
             viewModel.login()
         }
 
-        viewModel.response.observe(this, Observer {
-            if (it == "200") {
-                Toast.makeText(activity, "You are now logged in", Toast.LENGTH_LONG).show()
-            }
+        viewModel.messages.observe(this, Observer {
+            Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
         })
 
         return binding.root
