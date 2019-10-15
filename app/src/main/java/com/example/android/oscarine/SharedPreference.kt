@@ -2,7 +2,7 @@ package com.example.android.oscarine
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
+import timber.log.Timber
 
 class SharedPreference(context: Context) {
 
@@ -19,7 +19,7 @@ class SharedPreference(context: Context) {
         val editor = preference.edit()
         editor.putString(this.token, token)
         editor.apply()
-        Log.i("SharedPreference", "token saved successfully")
+        Timber.i("token saved successfully")
     }
 
 }
