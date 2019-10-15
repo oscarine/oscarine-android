@@ -81,7 +81,6 @@ class SignupViewModel: ViewModel() {
     override fun onCleared() {
         super.onCleared()
         _signupSuccessful.value = false
-        _messages.value = ""
     }
 
 }
