@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.android.oscarine.SharedPreference
 import com.example.android.oscarine.databinding.FragmentSigninBinding
 
 class SigninFragment : Fragment() {
@@ -19,7 +20,7 @@ class SigninFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val binding = FragmentSigninBinding.inflate(inflater)
 
-        viewModelFactory = SigninViewModelFactory(context!!)
+        viewModelFactory = SigninViewModelFactory(SharedPreference(context!!))
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(SigninViewModel::class.java)
 

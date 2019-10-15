@@ -1,7 +1,5 @@
 package com.example.android.oscarine.signin
 
-import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SigninViewModel(private val context: Context): ViewModel() {
+class SigninViewModel(private val sharedPreference: SharedPreference): ViewModel() {
 
     private val _response = MutableLiveData<String>()
     val response: LiveData<String>
@@ -35,7 +33,7 @@ class SigninViewModel(private val context: Context): ViewModel() {
                 response: Response<LoginServerResponse>
             ) {
                 _response.value = response.code().toString()
-                var token = response.body()?.access_token ?: ""
+                val token = response.body()!!.access_token
                 saveToken(token)
                 resetValuesOnSigninSuccess()
             }
@@ -58,7 +56,6 @@ class SigninViewModel(private val context: Context): ViewModel() {
     }
 
     fun saveToken(token: String) {
-        val preference = SharedPreference(context)
-        preference.setToken(token)
+        sharedPreference.setToken(token)
     }
 }
