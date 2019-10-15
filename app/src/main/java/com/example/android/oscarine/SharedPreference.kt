@@ -6,7 +6,7 @@ import android.util.Log
 
 class SharedPreference(context: Context) {
 
-    private val preferenceName: String = context.getResources().getString(R.string.SharedPreferencesFilename)
+    private val preferenceName = "oscarine_preferences"
     private val token = "Token"
 
     private val preference: SharedPreferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE)

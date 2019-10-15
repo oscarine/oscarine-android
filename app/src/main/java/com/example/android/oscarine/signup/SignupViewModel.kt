@@ -63,7 +63,7 @@ class SignupViewModel: ViewModel() {
                 )
             postForRegisteringNewUser(newUser)
         } else {
-            Log.i("SignupViewModel", "Passwords didn't match !")
+            _messages.value = "Passwords didn't match. Please try again"
         }
     }
 
