@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Oscarine</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Signup">Signup</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Email">Email</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+    <string name="Submit">Submit</string>
+    <string name="Signin" translatable="false">Sign In</string>
+    <string name="Login">Login</string>
 </resources>
