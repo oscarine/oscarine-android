@@ -36,7 +36,7 @@ class SignupViewModel: ViewModel() {
         OscarineApi.retrofitService.registerNewUser(newUser).enqueue( object: Callback<Any> {
             override fun onResponse(call: Call<Any>, response: Response<Any>) {
                 val responseCode = response.code()
-                if (responseCode == 201) {
+                if (responseCode == 200) {
                     _messages.value = "Registration successful"
                     _signupSuccessful.value = true
                     resetValuesOnSignupSuccess()
